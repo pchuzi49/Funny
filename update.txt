@@ -1,0 +1,22 @@
+@echo off
+setlocal
+
+start chrome.exe http://fakeupdate.net/win10u/
+
+setlocal
+ 
+REM The program to change focus to before sending the keystrokes.
+set program=Notepad
+ 
+set script=%temp%\keystrokes.vbs
+ 
+if exist "%script%" del "%script%"
+ 
+echo Set WshShell = WScript.CreateObject("WScript.Shell") >> "%script%"
+echo WshShell.AppActivate "%program%" >> "%script%"
+echo WScript.Sleep 100 >> "%script%"
+echo WshShell.SendKeys "{F11}" >> "%script%"
+echo WshShell.SendKeys "F11" >> "%script%"
+ 
+call "%script%"
+del "%script%"
